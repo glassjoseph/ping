@@ -1,0 +1,23 @@
+
+Standard pong:
+    ☐ paddles
+    ☐ ball
+    ☐ inputs
+    ☐ physics
+
+
+☐ Brainstorm chaos ideas
+
+☐ decide how to grant/revoke/change modes
+    ☐ powerups that you get?
+☐ instructions on special modes
+
+
+chaos ideas:
+    ☐ control the ball mode -
+        ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay
+    ☐ Super-fast up/down velocity mode
+    ☐ left-right movement mode
+    ☐ switch sides mode
+    ☐ reversed movements mode up/down,  left/right   up/right down/left
+    ☐ deathball
