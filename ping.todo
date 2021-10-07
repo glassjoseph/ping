@@ -4,6 +4,9 @@ Standard pong:
     ☐ ball
     ☐ inputs
     ☐ physics
+        ☐ collision
+        ☐ rebound
+        ☐
 
 
 ☐ Brainstorm chaos ideas
@@ -15,9 +18,12 @@ Standard pong:
 
 chaos ideas:
     ☐ control the ball mode -
-        ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay
+        ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay. Or a button to "freeze" the cheater if you notice.
     ☐ Super-fast up/down velocity mode
     ☐ left-right movement mode
     ☐ switch sides mode
     ☐ reversed movements mode up/down,  left/right   up/right down/left
     ☐ deathball
+    ☐ slippy ice mode - long slow speedup, slowdow
+    ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a negative space in a wall.
+    ☐ bigball, fastball
