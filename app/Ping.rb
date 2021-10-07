@@ -7,10 +7,8 @@ class Ping
     input
 
 
-    paddle ||= Paddle.new(50, 50, 20, 100)
 
-    outputs.solids << paddle.render
-
+        paddle.x += 1
 
 #
 
@@ -31,6 +29,15 @@ class Ping
                           w: state.player.w,
                           h: state.player.h,
                           path: 'sprites/square/green.png' }
+
+
+
+
+
+
+    outputs.solids << paddle.render
+
+
   end
 
   def defaults
@@ -43,11 +50,19 @@ class Ping
     player.acceleration ||= 0.4
     player.max_speed ||= 20
     player.friction ||= 0.9
+
+
+
+
   end
 
 
   def player
     state.player ||= {}
+  end
+
+  def paddle
+    state.paddle ||= Paddle.new(50, 50, 20, 100)
   end
 
   def input
