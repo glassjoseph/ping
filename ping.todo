@@ -1,15 +1,16 @@
 
 Standard pong:
-    ☐ paddles
-    ☐ ball
+    ✔ paddles @done(21-10-08 09:51)
+    ✔ ball @done(21-10-08 09:52)
     ☐ inputs
+    ☐ scoring
     ☐ physics
         ☐ collision
         ☐ rebound
-        ☐
 
 
-☐ Brainstorm chaos ideas
+
+✔ Brainstorm chaos ideas @done(21-10-08 08:37)
 
 ☐ decide how to grant/revoke/change modes
     ☐ powerups that you get?
@@ -19,6 +20,7 @@ Standard pong:
 chaos ideas:
     ☐ control the ball mode -
         ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay. Or a button to "freeze" the cheater if you notice.
+        ?? 'Use the Force'  - p1 and p2 can *both* control the ball with same inputs as their paddles?
     ☐ Super-fast up/down velocity mode
     ☐ left-right movement mode
     ☐ switch sides mode
@@ -27,3 +29,15 @@ chaos ideas:
     ☐ slippy ice mode - long slow speedup, slowdow
     ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a negative space in a wall.
     ☐ bigball, fastball
+    ☐ invisible/blinking ball or paddles
+    ☐ goofy sounds
+
+
+
+
+
+Architecture:
+    ☐ look up if ruby args are passed by ref or value
+    ☐ extract controls for left vs right paddle. (see book)
+
+    ☐ Move ping class into ping.rb and require (postponed for faster hotloading)
