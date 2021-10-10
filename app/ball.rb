@@ -1,24 +1,41 @@
 class Ball
   attr_accessor :x, :y, :w, :h, :dx, :dy
 
-  def initialize(x, y, w=100, h=100)
+  def initialize(x=640, y=360, w=100, h=100)
     @x = x
     @y = y
     @w = w
     @h = h
 
-    # @dx = Math.rand(3)
-    # @dy = Math.rand(3)
+    @dx = (rand(5) + 4).randomize(:sign)
+    @dy = (rand(5) + 4).randomize(:sign)
 
+  end
+
+  def reset
+    @x = 640
+    @y = 360
+    @dx = (rand(5) + 4).randomize(:sign)
+    @dy = (rand(5) + 4).randomize(:sign)
   end
 
   def update
     @x += @dx
     @y += @dy
+    collide_walls
   end
 
+
+  def collide_walls
+    if @y >= 700 || @y <= 0
+      @dy *= -1
+      puts 'bonk'
+    end
+  end
+
+
   def tick(args)
-    # update
+    update
     args.outputs.solids << [@x, @y, @w, @h]
     # puts "X: #{x}, Y: #{y}"
     # args.outputs.solids << [10, 10, 10, 10]

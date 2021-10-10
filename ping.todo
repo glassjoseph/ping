@@ -17,6 +17,9 @@ Standard pong:
 ☐ instructions on special modes
 
 
+
+
+
 chaos ideas:
     ☐ control the ball mode -
         ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay. Or a button to "freeze" the cheater if you notice.
@@ -31,13 +34,20 @@ chaos ideas:
     ☐ bigball, fastball
     ☐ invisible/blinking ball or paddles
     ☐ goofy sounds
+    ☐ Pause - you can pause the game, just pauses ball, not paddles.  But either player can unpause
 
 
 
+
+    ☐ Add bonk sound
+    ☐ Add score sound 
 
 
 Architecture:
     ☐ look up if ruby args are passed by ref or value
     ☐ extract controls for left vs right paddle. (see book)
+    ☐ extract player char code into scratch page
 
     ☐ Move ping class into ping.rb and require (postponed for faster hotloading)
+
+    ☐ check samples/04_physics_and_collisions/05_box_collision_2/

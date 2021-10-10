@@ -30,15 +30,15 @@ class Ping
     # outputs.labels  << [640, 420, 'Join the Discord! http://discord.dragonruby.org', 5, 1]
     # outputs.sprites << [576, 280, 128, 101, 'dragonruby.png']
 
-    outputs.labels  << [640, 150, 'This world has been connected.', 5, 1]
-    outputs.labels  << [640, 100, 'Tied to the darkness...', 5, 1]
+    outputs.labels  << [640, 150, "x: #{@ball.x}   dx: #{@ball.dx}", 5, 1]
+    outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
 
 
-    outputs.sprites << { x: state.player.x,
-                          y: state.player.y,
-                          w: state.player.w,
-                          h: state.player.h,
-                          path: 'sprites/square/green.png' }
+    # outputs.sprites << { x: state.player.x,
+    #                       y: state.player.y,
+    #                       w: state.player.w,
+    #                       h: state.player.h,
+    #                       path: 'sprites/square/green.png' }
 
 
 
@@ -122,6 +122,11 @@ class Ping
         state.player.dy = 0
       else
         state.player.dy = (state.player.dy  * state.player.friction)
+      end
+
+
+      if inputs.keyboard.escape
+        @ball.reset
       end
     end
 
