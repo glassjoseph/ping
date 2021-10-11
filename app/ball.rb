@@ -27,7 +27,7 @@ class Ball
 
 
   def collide_walls
-    if @y >= 700 || @y <= 0
+    if @y >= 720 || @y <= 0
       @dy *= -1
       puts 'bonk'
     end

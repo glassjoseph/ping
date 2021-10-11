@@ -9,16 +9,16 @@ class Paddle
     @h = h
   end
 
-  def calc_inputs(args)
+  def update(args)
     if args.inputs.keyboard.up
-      @y += 10
+      @y = (@y + 10).lesser(720 - @h)
     elsif args.inputs.keyboard.down
-      @y -= 10
+      @y = (@y - 10).greater(0)
     end
   end
 
   def tick(args)
-    calc_inputs(args)
+    update(args)
     args.outputs.solids << [@x, @y, @w, @h]
   end
 end

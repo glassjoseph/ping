@@ -4,6 +4,11 @@ Standard pong:
     ✔ ball @done(21-10-08 09:52)
     ☐ inputs
     ☐ scoring
+    ☐ Game states
+        ☐ pre-launch
+        ☐ in-game
+        ☐ pause
+        ☐ win condition
     ☐ physics
         ☐ collision
         ☐ rebound
@@ -40,11 +45,13 @@ chaos ideas:
 
 
     ☐ Add bonk sound
-    ☐ Add score sound 
+    ☐ Add score sound
 
 
 Architecture:
     ☐ look up if ruby args are passed by ref or value
+    ☐ Figure out values for window heights. 720 y limit seems slightly offscreen for paddles. 710? A: The issue is paddle was += 10 pixels, so could overshoot to 730. 
+
     ☐ extract controls for left vs right paddle. (see book)
     ☐ extract player char code into scratch page
 
