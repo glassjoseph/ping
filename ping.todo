@@ -11,9 +11,14 @@ Standard pong:
         ☐ win condition
     ☐ physics
         ✔ wall collision @done(21-10-11 10:22)
+        ✔ rebound @done(21-10-12 10:30)
         ☐ paddle collision
-        ☐ rebound
+            ☐ check if ball has collided.
+            ☐ Move ball to edge of paddle?
+            ☐ reverse dx
 
+    ☐ Add bonk sound
+    ☐ Add score sound
 
 
 ✔ Brainstorm chaos ideas @done(21-10-08 08:37)
@@ -22,6 +27,10 @@ Standard pong:
     ☐ powerups that you get?
 ☐ instructions on special modes
 
+
+
+☐ Mode Transition
+    - should it occur after timeout/cooldown? Or on a button press?
 
 
 
@@ -36,17 +45,20 @@ chaos ideas:
     ☐ reversed movements mode up/down,  left/right   up/right down/left
     ☐ deathball - ball speeds up, bounces on all walls, point awarded to whoever doesn't get hit first
     ☐ slippy ice mode - long slow speedup, slowdow
-    ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a negative space in a wall.
+    ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a small negative space in a wall.
     ☐ bigball, fastball
-    ☐ invisible/blinking ball or paddles
+    ☐ invisible/blinking ball or paddles. Ball is invisible in middle, visible as it nears either side.
     ☐ goofy sounds
     ☐ Pause - you can pause the game, just pauses ball, not paddles.  But either player can unpause
+    ☐ soccer-mode - left and right sides are walls, only small goal/ two goals in middle?
+
+    ☐ Handicap mode - your paddle gets longer with each point you're behind the other player.
 
 
 
 
-    ☐ Add bonk sound
-    ☐ Add score sound
+
+
 
 
 Architecture:

@@ -32,17 +32,15 @@ class Ball
   def collide_walls
     if @y >= 720 || @y <= 0
       @dy *= -1
-      #
-      puts 'bonk'
     end
 
     # deathball mode
     if @x >= 1280 || @x <= 0
       @dx *= -1
       @dx +=  @dx.pos? ? 1 : -1
-      puts 'bonk'
     end
 
+    puts 'bonk'
   end
 
 
