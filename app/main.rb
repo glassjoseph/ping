@@ -41,15 +41,19 @@ class Ping
     # @ball.y = 500
 
 
+    calc_collision
 
 
 
     args.gtk.log_level = :off
   end
 
-  def defaults
+  def calc_collision
+    if @paddle_1.rect.intersect_rect?(@ball.rect) || @paddle_2.rect.intersect_rect?(@ball.rect)
+      puts "BOOOOOOOOOONK"
+      @ball.dx *= -1
+    end
   end
-
 
 
   def input

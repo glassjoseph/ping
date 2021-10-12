@@ -17,6 +17,10 @@ class Paddle
     end
   end
 
+  def rect
+    [@x, @y, @w, @h]
+  end
+
   def tick(args)
     update(args)
     args.outputs.solids << [@x, @y, @w, @h]
