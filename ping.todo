@@ -10,7 +10,8 @@ Standard pong:
         ☐ pause
         ☐ win condition
     ☐ physics
-        ☐ collision
+        ✔ wall collision @done(21-10-11 10:22)
+        ☐ paddle collision
         ☐ rebound
 
 
@@ -33,7 +34,7 @@ chaos ideas:
     ☐ left-right movement mode
     ☐ switch sides mode
     ☐ reversed movements mode up/down,  left/right   up/right down/left
-    ☐ deathball
+    ☐ deathball - ball speeds up, bounces on all walls, point awarded to whoever doesn't get hit first
     ☐ slippy ice mode - long slow speedup, slowdow
     ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a negative space in a wall.
     ☐ bigball, fastball
@@ -50,7 +51,7 @@ chaos ideas:
 
 Architecture:
     ☐ look up if ruby args are passed by ref or value
-    ☐ Figure out values for window heights. 720 y limit seems slightly offscreen for paddles. 710? A: The issue is paddle was += 10 pixels, so could overshoot to 730. 
+    ☐ Figure out values for window heights. 720 y limit seems slightly offscreen for paddles. 710? A: The issue is paddle was += 10 pixels, so could overshoot to 730.
 
     ☐ extract controls for left vs right paddle. (see book)
     ☐ extract player char code into scratch page
