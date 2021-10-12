@@ -12,6 +12,7 @@ class Ball
     # @dx = (rand(50) + 30).randomize(:sign) #deatball
     @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
     @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
+    @dy = 0
 
   end
 
@@ -32,13 +33,14 @@ class Ball
   def collide_walls
     if @y >= 720 || @y <= 0
       @dy *= -1
+      $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
       puts 'bonk'
     end
 
     # deathball mode
     if @x >= 1280 || @x <= 0
       @dx *= -1
-      @dx +=  @dx.pos? ? 1 : -1
+      @dx +=  (@dx.pos? ? 1 : -1) unless (@dx.abs() > 30)
       puts 'bonk'
     end
 

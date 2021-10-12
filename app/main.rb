@@ -20,6 +20,9 @@ class Ping
     @paddle_1 = Paddle.new(50, 50, 20, 100)
     @paddle_2 = Paddle.new(1200, 50, 20, 100)
     @ball = Ball.new(640, 360, 10, 10)
+
+    @game_state = "intro"
+    @set = false
   end
 
 
@@ -41,16 +44,22 @@ class Ping
     # @ball.y = 500
 
 
-    calc_collision
+    calc_collision(args)
 
-
-
+  # if !@set
+  #   args.outputs.sounds << "/Users/josephglass/personal/dragon/my_games/ping/sounds/paddle_hit.wav"
+  #   @set = true
+  # end
+  #   puts args.outputs.sounds unless args.outputs.sounds.empty?
     args.gtk.log_level = :off
   end
 
-  def calc_collision
+  def calc_collision(args)
     if @paddle_1.rect.intersect_rect?(@ball.rect) || @paddle_2.rect.intersect_rect?(@ball.rect)
+      args.outputs.sounds << "sounds/paddle_hit.wav"
+
       puts "BOOOOOOOOOONK"
+      @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 40 )
       @ball.dx *= -1
     end
   end

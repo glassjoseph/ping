@@ -13,14 +13,17 @@ Standard pong:
         ✔ wall collision @done(21-10-11 10:22)
         ✔ rebound @done(21-10-12 10:30)
         ☐ paddle collision
-            ☐ check if ball has collided.
+            ✔ check if ball has collided. @done(21-10-12 15:26)
             ☐ Move ball to edge of paddle?
-            ☐ reverse dx
+            ✔ reverse dx @done(21-10-12 15:26)
 
-    ☐ Add bonk sound
-    ☐ Add score sound
+    ✔ Add bonk sound @done(21-10-12 15:23)
+    ✔ Add wall sound @done(21-10-12 15:23)
+    ✔ Add score sound @done(21-10-12 15:50)
+    ✔ Add max speed @done(21-10-12 15:50)
 
     ☐ fix inside-paddle bug
+    ☐ fix speed through paddle bug.
 
 ✔ Brainstorm chaos ideas @done(21-10-08 08:37)
 
