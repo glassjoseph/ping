@@ -7,16 +7,18 @@ class Ball
     @w = w
     @h = h
 
-    @dx = (rand(5) + 4).randomize(:sign)
-    @dy = (rand(5) + 4).randomize(:sign)
+    BASE_SPEED = 5
+
+    @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
+    @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
 
   end
 
   def reset
     @x = 640
     @y = 360
-    @dx = (rand(5) + 4).randomize(:sign)
-    @dy = (rand(5) + 4).randomize(:sign)
+    @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
+    @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
   end
 
   def update

@@ -12,15 +12,23 @@ class Ping
   attr_gtk
 
   def initialize
+    setup
+  end
+
+  # convenience method for tweaking paddles during dev. Consider moving to init on publish.
+  def setup
+
     @paddle_1 = Paddle.new(50, 50, 20, 100)
     @paddle_2 = Paddle.new(1200, 50, 20, 100)
     @ball = Ball.new(640, 360, 10, 10)
   end
 
+
   def tick
     defaults
     calc
     input
+
 
 
     outputs.labels  << [640, 700, 'Velocities', 5, 1]
@@ -127,6 +135,7 @@ class Ping
 
       if inputs.keyboard.escape
         @ball.reset
+        setup
       end
     end
 
@@ -135,6 +144,7 @@ class Ping
 
 
   end
+
 
   def calc
     state.player.x += state.player.dx
