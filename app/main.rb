@@ -17,8 +17,10 @@ class Ping
 
   # convenience method for tweaking paddles during dev. Consider moving to init on publish.
   def setup
-    @paddle_1 = Paddle.new(50, 50, 20, 100)
-    @paddle_2 = Paddle.new(1200, 50, 20, 100)
+    # @paddle_1 = Paddle.new(50, 50, 20, 100)
+    # @paddle_2 = Paddle.new(1200, 50, 20, 100)
+    @paddle_1 = Paddle.new(100, 50, 20, 100)
+    @paddle_2 = Paddle.new(1150, 50, 20, 100)
     @ball = Ball.new(640, 360, 10, 10)
 
     @game_state = "intro"
@@ -46,11 +48,6 @@ class Ping
 
     calc_collision(args)
 
-  # if !@set
-  #   args.outputs.sounds << "/Users/josephglass/personal/dragon/my_games/ping/sounds/paddle_hit.wav"
-  #   @set = true
-  # end
-  #   puts args.outputs.sounds unless args.outputs.sounds.empty?
     args.gtk.log_level = :off
   end
 
@@ -59,11 +56,10 @@ class Ping
       args.outputs.sounds << "sounds/paddle_hit.wav"
 
       puts "BOOOOOOOOOONK"
-      @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 40 )
+      @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 35 )
       @ball.dx *= -1
     end
   end
-
 
   def input
 
@@ -72,11 +68,15 @@ class Ping
       setup
     end
 
-    # if no buttons, decrease velocity
-
-
+    if inputs.keyboard.c
+      up_close_mode
+    end
 
   end
 
+  def up_close_mode
+    @paddle_1 = Paddle.new(400, 50, 20, 100)
+    @paddle_2 = Paddle.new(950, 50, 20, 100)
+  end
 
 end

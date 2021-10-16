@@ -22,6 +22,7 @@ Standard pong:
     ✔ Add score sound @done(21-10-12 15:50)
     ✔ Add max speed @done(21-10-12 15:50)
 
+    ☐ fix static at end of score sound
     ☐ fix inside-paddle bug
     ☐ fix speed through paddle bug.
 
@@ -50,7 +51,11 @@ chaos ideas:
     ☐ deathball - ball speeds up, bounces on all walls, point awarded to whoever doesn't get hit first
     ☐ slippy ice mode - long slow speedup, slowdow
     ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a small negative space in a wall.
-    ☐ bigball, fastball
+    ☐ Paddleboard mode - your goal is your side's wall. You get points for each bounce against it. Try to trap ball between yourself and the wall.
+    ☐ bigball - large ball. knockback. 'dazed/stunned' effect?
+
+    ☐ fastball
+    ☐ Close and slow
     ☐ invisible/blinking ball or paddles. Ball is invisible in middle, visible as it nears either side.
     ☐ goofy sounds
     ☐ Pause - you can pause the game, just pauses ball, not paddles.  But either player can unpause
