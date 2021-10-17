@@ -42,9 +42,6 @@ class Ping
     @paddle_1.tick(args)
     @paddle_2.tick(args)
     @ball.tick(args)
-    # @ball.x = 500
-    # @ball.y = 500
-
 
     calc_collision(args)
 
@@ -73,6 +70,7 @@ class Ping
     end
 
   end
+
 
   def up_close_mode
     @paddle_1 = Paddle.new(400, 50, 20, 100)

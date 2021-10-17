@@ -37,12 +37,18 @@ class Ball
       puts 'bonk'
     end
 
-    # deathball mode
     if @x >= 1280 || @x <= 0
-      @dx *= -1
-      @dx +=  (@dx.pos? ? 1 : -1) unless (@dx.abs() > 35)
-      puts 'bonk'
       $gtk.args.outputs.sounds << "sounds/score.wav"
+      # increment score
+      reset
+
+      # deathball mode
+      if false
+        @dx *= -1
+        @dx +=  (@dx.pos? ? 1 : -1) unless (@dx.abs() > 35)
+        puts 'bonk'
+        $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
+      end
     end
 
 

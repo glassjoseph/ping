@@ -25,6 +25,8 @@ Standard pong:
     ☐ fix static at end of score sound
     ☐ fix inside-paddle bug
     ☐ fix speed through paddle bug.
+        ☐ make a rect between ball and next dx
+        ☐ if intersects, collide and reposition at near side of paddle. 
 
 ✔ Brainstorm chaos ideas @done(21-10-08 08:37)
 
