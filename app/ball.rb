@@ -26,32 +26,6 @@ class Ball
   def update
     @x += @dx
     @y += @dy
-    collide_walls
-  end
-
-
-  def collide_walls
-    if @y >= 720 || @y <= 0
-      @dy *= -1
-      $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
-      puts 'bonk'
-    end
-
-    if @x >= 1280 || @x <= 0
-      $gtk.args.outputs.sounds << "sounds/score.wav"
-      # increment score
-      reset
-
-      # deathball mode
-      if false
-        @dx *= -1
-        @dx +=  (@dx.pos? ? 1 : -1) unless (@dx.abs() > 35)
-        puts 'bonk'
-        $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
-      end
-    end
-
-
   end
 
   def rect

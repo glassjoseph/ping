@@ -21,6 +21,8 @@ class Ping
     # @paddle_2 = Paddle.new(1200, 50, 20, 100)
     @paddle_1 = Paddle.new(100, 50, 20, 100)
     @paddle_2 = Paddle.new(1150, 50, 20, 100)
+    @player_1_score = 0
+    @player_2_score = 0
     @ball = Ball.new(640, 360, 10, 10)
 
     @game_state = "intro"
@@ -31,6 +33,8 @@ class Ping
   def tick
     # defaults
     input
+    outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
+    outputs.labels  << [800, 700, "Score: #{@player_2_score}", 5, 1]
     outputs.labels  << [640, 700, 'Velocities', 5, 1]
     outputs.labels  << [640, 150, "x: #{@ball.x}   dx: #{@ball.dx}", 5, 1]
     outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
@@ -56,6 +60,8 @@ class Ping
       @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 35 )
       @ball.dx *= -1
     end
+
+    collide_walls
   end
 
   def input
@@ -75,6 +81,33 @@ class Ping
   def up_close_mode
     @paddle_1 = Paddle.new(400, 50, 20, 100)
     @paddle_2 = Paddle.new(950, 50, 20, 100)
+  end
+
+  def collide_walls
+    if @ball.y >= 720 || @ball.y <= 0
+      @ball.dy *= -1
+      outputs.sounds << "sounds/wall_hit.wav"
+      puts 'bonk'
+    end
+    if @ball.x >= 1280 || @ball.x <= 0
+      # increment score
+      if @ball.x >= 1280
+        @player_1_score += 1
+      else
+        @player_2_score += 1
+      end
+
+      outputs.sounds << "sounds/score.wav"
+      @ball.reset
+
+      # deathball mode
+      if false
+        @ball.dx *= -1
+        @ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 35)
+        puts 'bonk'
+        $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
+      end
+    end
   end
 
 end
