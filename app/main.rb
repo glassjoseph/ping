@@ -13,6 +13,9 @@ class Ping
 
   def initialize
     setup
+    # $gtk.args.state.game_mode = 'intro'
+    # $gtk.args.state.game_modes = ["intro", "pause", "play" ]
+
   end
 
   # convenience method for tweaking paddles during dev. Consider moving to init on publish.
@@ -25,14 +28,21 @@ class Ping
     @player_2_score = 0
     @ball = Ball.new(640, 360, 10, 10)
 
-    #modes
-    @game_mode = "intro"
-    @bouncy_walls = false
+    @bouncy_walls = true
+    # modes
+    # owngoal: bouncy walls and own-goal
+    # tag: bouncy walls, one paddle, scoring on paddle/ball collision
+
   end
 
+  def defaults
+    $gtk.args.state.game_mode = "play"
+    $gtk.args.state.game_paused ||= "false"
+    # $gtk.args.state.blinky_ball ||= false
+  end
 
   def tick
-    # defaults
+    defaults
     input
     outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
     outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
@@ -54,11 +64,12 @@ class Ping
   end
 
   def calc_collision(args)
-    if @paddle_1.rect.intersect_rect?(@ball.rect) || @paddle_2.rect.intersect_rect?(@ball.rect)
+
+    if @paddle_1.rect.intersect_rect?(@ball.collision_rect) || @paddle_2.rect.intersect_rect?(@ball.collision_rect)
       args.outputs.sounds << "sounds/paddle_hit.wav"
 
       puts "BOOOOOOOOOONK"
-      @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 35 )
+      @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 50 )
       @ball.dx *= -1
     end
 
@@ -76,6 +87,19 @@ class Ping
       up_close_mode
     end
 
+    if inputs.keyboard.key_down.p || inputs.keyboard.key_down.q
+      if $gtk.args.state.game_paused == "paused"
+        gtk.args.state.game_paused = "play"
+      else
+        gtk.args.state.game_paused = "paused"
+      end
+      puts "Pause!"
+      puts "Pauseval: #{$gtk.args.state.game_paused}"
+    end
+
+    if inputs.keyboard.key_down.b
+      $gtk.args.state.blinky_ball = true
+    end
 
   end
 
@@ -95,7 +119,7 @@ class Ping
     # goal collision
     if @ball.x >= 1280 || @ball.x <= 0
 
-      # outputs.sounds << "sounds/score.wav"
+      outputs.sounds << "sounds/score2.wav"
 
       if !@bouncy_walls
         if @ball.x >= 1280
