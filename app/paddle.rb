@@ -1,6 +1,5 @@
 class Paddle
-  # attr_gtk
-  attr_accessor :x, :y, :w, :h
+  attr_accessor :x, :y, :w, :h, :control_scheme
 
   def initialize(x, y, w=10, h=100, control_scheme)
     @x = x
@@ -13,10 +12,19 @@ class Paddle
 
 
   def update(args)
-    if args.inputs.keyboard.up
-      go_up
-    elsif args.inputs.keyboard.down
-      go_down
+    if @control_scheme == "arrows"
+      if args.inputs.keyboard.key_held.up
+        go_up
+      elsif args.inputs.keyboard.key_held.down
+        go_down
+      end
+    end
+    if @control_scheme == "wasd"
+      if args.inputs.keyboard.key_held.w
+        go_up
+      elsif args.inputs.keyboard.key_held.s
+        go_down
+      end
     end
   end
 

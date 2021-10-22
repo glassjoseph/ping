@@ -19,8 +19,8 @@ class Ping
   def setup
     # @paddle_1 = Paddle.new(50, 50, 20, 100)
     # @paddle_2 = Paddle.new(1200, 50, 20, 100)
-    @paddle_1 = Paddle.new(100, 50, 20, 100)
-    @paddle_2 = Paddle.new(1150, 50, 20, 100)
+    @paddle_1 = Paddle.new(100, 50, 20, 100, "wasd")
+    @paddle_2 = Paddle.new(1150, 50, 20, 100, "arrows")
     @player_1_score = 0
     @player_2_score = 0
     @ball = Ball.new(640, 360, 10, 10)
@@ -36,10 +36,15 @@ class Ping
     input
     outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
     outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
-    outputs.labels  << [640, 700, 'Velocities', 5, 1]
+    outputs.labels  << [640, 700, "Velocities", 5, 1]
     outputs.labels  << [640, 150, "x: #{@ball.x}   dx: #{@ball.dx}", 5, 1]
     outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
 
+
+    puts "UPPP" if inputs.keyboard.key_held.up
+    puts "DOWWNN" if inputs.keyboard.key_held.down
+    puts "LEEFFFTT" if inputs.keyboard.key_held.left
+    puts "Right" if inputs.keyboard.key_held.right
 
     # outputs.solids << @paddle_1.tick(args)
     # outputs.solids << @paddle_2.tick(args)
@@ -81,8 +86,8 @@ class Ping
 
 
   def up_close_mode
-    @paddle_1 = Paddle.new(400, 50, 20, 100)
-    @paddle_2 = Paddle.new(950, 50, 20, 100)
+    @paddle_1 = Paddle.new(400, 50, 20, 100, "wasd")
+    @paddle_2 = Paddle.new(950, 50, 20, 100, "arrows")
   end
 
   def collide_walls
@@ -95,7 +100,7 @@ class Ping
     # goal collision
     if @ball.x >= 1280 || @ball.x <= 0
 
-      outputs.sounds << "sounds/score.wav"
+      # outputs.sounds << "sounds/score.wav"
 
       if !@bouncy_walls
         if @ball.x >= 1280
