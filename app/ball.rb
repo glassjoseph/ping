@@ -28,8 +28,14 @@ class Ball
     @y += @dy
   end
 
-  def rect
-    [@x, @y, @w, @h]
+  def collision_rect
+    # expand collision rect ahead to detect next frame
+    if @dx > 0
+      [@x, @y, @w + @dx, @h]
+    else
+      # shift ball collision detection to left
+      [@x + @dx, @y, @w + @dx.abs(), @h]
+    end
   end
 
 
