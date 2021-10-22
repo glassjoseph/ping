@@ -25,8 +25,9 @@ class Ping
     @player_2_score = 0
     @ball = Ball.new(640, 360, 10, 10)
 
-    @game_state = "intro"
-    @set = false
+    #modes
+    @game_mode = "intro"
+    @bouncy_walls = false
   end
 
 
@@ -89,23 +90,33 @@ class Ping
       outputs.sounds << "sounds/wall_hit.wav"
       puts 'bonk'
     end
+
+    # goal collision
     if @ball.x >= 1280 || @ball.x <= 0
-      # increment score
-      if @ball.x >= 1280
-        @player_1_score += 1
-      else
-        @player_2_score += 1
-      end
 
       outputs.sounds << "sounds/score.wav"
-      @ball.reset
 
-      # deathball mode
-      if false
+      if !@bouncy_walls
+        if @ball.x >= 1280
+          @player_1_score += 1
+        else
+          @player_2_score += 1
+        end
+        @ball.reset
+      else
+        # owngoal mode
+        # deathball mode
+        if @ball.x >= 1280
+          @player_2_score += 1
+        else
+          @player_1_score += 1
+        end
+
         @ball.dx *= -1
-        @ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 35)
-        puts 'bonk'
-        $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
+        @ball.dx +=  (@ball.dx.pos? ? 1 : -1) unless (@ball.dx.abs() > 35)
+
+        puts 'bonk score'
+        # $gtk.args.outputs.sounds << "sounds/wall_hit.wav"
       end
     end
   end

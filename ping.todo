@@ -3,10 +3,11 @@ Standard pong:
     ✔ paddles @done(21-10-08 09:51)
     ✔ ball @done(21-10-08 09:52)
     ☐ inputs
-    ☐ scoring gs@started(21-10-19 08:42)
-        ☐ initialize score
-        ☐ increment
-        ☐ display
+    ✔ scoring @started(21-10-19 08:42) @done(21-10-19 09:04) @lasted(22m33s)
+        ✔ initialize score @done(21-10-19 09:04)
+        ✔ increment @done(21-10-19 09:04)
+        ✔ display @done(21-10-19 09:04)
+
     ☐ Game states
         ☐ pre-launch
         ☐ in-game
@@ -69,6 +70,7 @@ chaos ideas:
     ☐ Handicap mode - your paddle gets longer with each point you're behind the other player.
 
 
+    ☐ p1 can speed up ball? p2 can slow down ball? Both pressed = normal speed
 
 
 
