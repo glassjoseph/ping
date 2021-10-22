@@ -35,7 +35,7 @@ class Ping
     # defaults
     input
     outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
-    outputs.labels  << [800, 700, "Score: #{@player_2_score}", 5, 1]
+    outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
     outputs.labels  << [640, 700, 'Velocities', 5, 1]
     outputs.labels  << [640, 150, "x: #{@ball.x}   dx: #{@ball.dx}", 5, 1]
     outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
