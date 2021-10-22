@@ -76,6 +76,7 @@ class Ping
       up_close_mode
     end
 
+
   end
 
 
