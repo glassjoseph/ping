@@ -34,10 +34,14 @@ class Ball
 
 
   def tick(args)
-    update
-    args.outputs.solids << [@x, @y, @w, @h]
+    update unless args.state.game_paused == "paused"
+
+    if $gtk.args.state.blinky_ball
+      return if (args.state.tick_count % 100 < 25)
+    end
+
+    (args.outputs.solids << [@x, @y, @w, @h])
     # puts "X: #{x}, Y: #{y}"
-    # args.outputs.solids << [10, 10, 10, 10]
   end
 
 end

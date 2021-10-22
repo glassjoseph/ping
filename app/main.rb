@@ -41,11 +41,6 @@ class Ping
     outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
 
 
-    puts "UPPP" if inputs.keyboard.key_held.up
-    puts "DOWWNN" if inputs.keyboard.key_held.down
-    puts "LEEFFFTT" if inputs.keyboard.key_held.left
-    puts "Right" if inputs.keyboard.key_held.right
-
     # outputs.solids << @paddle_1.tick(args)
     # outputs.solids << @paddle_2.tick(args)
 

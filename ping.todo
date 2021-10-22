@@ -1,13 +1,6 @@
 
 Standard pong:
-    ✔ paddles @done(21-10-08 09:51)
-    ✔ ball @done(21-10-08 09:52)
     ☐ inputs
-        ☐ paddle 2
-    ✔ scoring @started(21-10-19 08:42) @done(21-10-19 09:04) @lasted(22m33s)
-        ✔ initialize score @done(21-10-19 09:04)
-        ✔ increment @done(21-10-19 09:04)
-        ✔ display @done(21-10-19 09:04)
 
     ☐ Game states
         ☐ pre-launch
@@ -15,37 +8,25 @@ Standard pong:
         ☐ pause
         ☐ win condition
     ☐ physics
-        ✔ wall collision @done(21-10-11 10:22)
-        ✔ rebound @done(21-10-12 10:30)
         ☐ paddle collision
-            ✔ check if ball has collided. @done(21-10-12 15:26)
             ☐ Move ball to edge of paddle?
-            ✔ reverse dx @done(21-10-12 15:26)
 
-    ✔ Add bonk sound @done(21-10-12 15:23)
-    ✔ Add wall sound @done(21-10-12 15:23)
-    ✔ Add score sound @done(21-10-12 15:50)
-    ✔ Add max speed @done(21-10-12 15:50)
 
     ☐ fix static at end of score sound
     ☐ fix inside-paddle bug
     ☐ fix speed through paddle bug.
-        ☐ make a rect between ball and next dx
-        ☐ if intersects, collide and reposition at near side of paddle.
+        ✔ make a rect between ball and next dx @done(21-10-22 16:40)
+        ✔ if intersects, collide and reposition at near side of paddle. @done(21-10-22 16:40)
+        ☐ 
 
-✔ Brainstorm chaos ideas @done(21-10-08 08:37)
+        ☐
 
 ☐ decide how to grant/revoke/change modes
     ☐ powerups that you get?
 ☐ instructions on special modes
 
-
-
 ☐ Mode Transition
     - should it occur after timeout/cooldown? Or on a button press?
-
-
-
 
 chaos ideas:
     ☐ control the ball mode -
@@ -70,13 +51,7 @@ chaos ideas:
 
     ☐ Handicap mode - your paddle gets longer with each point you're behind the other player.
 
-
     ☐ p1 can speed up ball? p2 can slow down ball? Both pressed = normal speed
-
-
-
-
-
 
 Architecture:
     ☐ look up if ruby args are passed by ref or value
@@ -88,3 +63,20 @@ Architecture:
     ☐ Move ping class into ping.rb and require (postponed for faster hotloading)
 
     ☐ check samples/04_physics_and_collisions/05_box_collision_2/
+Archive:
+  ✔ paddles @done(21-10-08 09:51) @project(Standard pong)
+  ✔ ball @done(21-10-08 09:52) @project(Standard pong)
+  ✔ paddle 2 @done(21-10-22 14:33) @project(Standard pong)
+  ✔ scoring @started(21-10-19 08:42) @done(21-10-19 09:04) @lasted(22m33s) @project(Standard pong)
+  ✔ initialize score @done(21-10-19 09:04) @project(Standard pong)
+  ✔ increment @done(21-10-19 09:04) @project(Standard pong)
+  ✔ display @done(21-10-19 09:04) @project(Standard pong)
+  ✔ wall collision @done(21-10-11 10:22) @project(Standard pong)
+  ✔ rebound @done(21-10-12 10:30) @project(Standard pong)
+  ✔ check if ball has collided. @done(21-10-12 15:26) @project(Standard pong)
+  ✔ reverse dx @done(21-10-12 15:26) @project(Standard pong)
+  ✔ Add bonk sound @done(21-10-12 15:23) @project(Standard pong)
+  ✔ Add wall sound @done(21-10-12 15:23) @project(Standard pong)
+  ✔ Add score sound @done(21-10-12 15:50) @project(Standard pong)
+  ✔ Add max speed @done(21-10-12 15:50) @project(Standard pong)
+  ✔ Brainstorm chaos ideas @done(21-10-08 08:37)
