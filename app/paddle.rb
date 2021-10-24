@@ -19,10 +19,12 @@ class Paddle
         go_down
       end
       # left/right mode
-      if args.inputs.keyboard.key_held.left
-        go_left
-      elsif args.inputs.keyboard.key_held.right
-        go_right
+      if args.state.game_modes[:free_range]
+        if args.inputs.keyboard.key_held.left
+          go_left
+        elsif args.inputs.keyboard.key_held.right
+          go_right
+        end
       end
     end
     if @control_scheme == "wasd"
@@ -32,12 +34,13 @@ class Paddle
         go_down
       end
       # left/right mode
-      if args.inputs.keyboard.key_held.a
-        go_left
-      elsif args.inputs.keyboard.key_held.d
-        go_right
+      if args.state.game_modes[:free_range]
+        if args.inputs.keyboard.key_held.a
+          go_left
+        elsif args.inputs.keyboard.key_held.d
+          go_right
+        end
       end
-
     end
   end
 

@@ -5,38 +5,32 @@ class Ping
     setup
   end
 
-  # convenience method for tweaking paddles during dev. Consider moving to init on publish.
   def setup
     @paddle_1 = Paddle.new(100, 300, 20, 100, "wasd")
     @paddle_2 = Paddle.new(1150, 300, 20, 100, "arrows")
     @player_1_score = 0
     @player_2_score = 0
+
     @balls = [Ball.new(640, 360, 10, 10)]
     $gtk.args.state.game_modes = { serve: true,
-      blinky_ball: false,
       paused: false,
-      bigball: false,
-      bouncy_walls: false,
-      coop: false
-    }
-  end
-
-  def defaults
-    state.game_modes ||= { serve: true,
+      mega_ball: false,
       blinky_ball: false,
-      paused: false,
-      bigball: false,
+      up_close_and_personal: false,
       bouncy_walls: false,
+      free_range: false,
+      multi_ball: false,
+      "co-op": false
     }
   end
 
   def tick
-    defaults
     input
     labels
 
     @paddle_1.tick(args)
     @paddle_2.tick(args)
+
     @balls.each do |ball|
       ball.tick(args)
     end
@@ -57,58 +51,87 @@ class Ping
       end
     end
 
-
     collide_walls
   end
 
   def input
-
     if state.game_modes[:serve] == true & inputs.keyboard.space
       state.game_modes[:serve] = false
     end
 
-    if inputs.keyboard.escape
+    if inputs.keyboard.key_down.escape
       @balls.each { |ball| ball.reset }
       state.game_modes[:serve] = true
       setup
-    end
-
-    if inputs.keyboard.c
-      up_close_mode
     end
 
     if inputs.keyboard.key_down.p || inputs.keyboard.key_down.q
       state.game_modes[:paused] = !state.game_modes[:paused]
     end
 
-    if inputs.keyboard.key_down.b
+    if inputs.keyboard.key_down.m || inputs.keyboard.key_down.one
+      mega_ball_mode
+    end
+
+    if inputs.keyboard.key_down.i || inputs.keyboard.key_down.two
       state.game_modes[:blinky_ball] = !state.game_modes[:blinky_ball]
     end
 
-    if inputs.keyboard.key_down.m
-      big_ball_mode
+    if inputs.keyboard.key_down.x || inputs.keyboard.key_down.three
+      state.game_modes[:up_close_and_personal] = !state.game_modes[:up_close_and_personal]
+
+      if state.game_modes[:up_close_and_personal]
+        @paddle_1.x = 440
+        @paddle_2.x = 840
+      else
+        @paddle_1.x = 100
+        @paddle_2.x = 1150
+      end
     end
 
-    if inputs.keyboard.key_down.n
+    if inputs.keyboard.key_down.b || inputs.keyboard.key_down.four
+      state.game_modes[:bouncy_walls] = !state.game_modes[:bouncy_walls]
+    end
+
+    if inputs.keyboard.key_down.f || inputs.keyboard.key_down.five
+      state.game_modes[:free_range] = !state.game_modes[:free_range]
+    end
+
+
+    if inputs.keyboard.key_down.y || inputs.keyboard.key_down.six
       @balls.push(Ball.new(640, 360, 10, 10))
       state.game_modes[:multi_ball] = true
     end
 
-    if inputs.keyboard.key_down.o
-      state.game_modes[:bouncy_walls] = !state.game_modes[:bouncy_walls]
+    if inputs.keyboard.key_down.u || inputs.keyboard.key_down.seven
+      if @balls.count > 1
+        @balls.pop()
+      else
+        state.game_modes[:multi_ball] = false
+      end
+    end
+
+
+    if inputs.keyboard.key_down.c || inputs.keyboard.key_down.eight
+      if !state.game_modes[:"co-op"]
+        state.game_modes[:bouncy_walls] = true
+        state.game_modes[:"co-op"] = true
+      else
+        state.game_modes[:"co-op"] = false
+      end
     end
   end
 
   def labels
-    outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
+    outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1] unless state.game_modes[:"co-op"]
     outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
 
 
     # TODO: improve game_modes so it's not recalculated every tick.
-    mode_y = 600
+    mode_label_y = 700
     state.game_modes.select {|k, v| v}.keys.each {|mode_name|
-      outputs.labels  << [640, mode_y, mode_name, 2, 1]
-      mode_y -= 30
+      outputs.labels  << [640, mode_label_y, mode_name, 2, 1]
+      mode_label_y -= 30
     }
 
     if state.game_modes[:debug]
@@ -117,14 +140,8 @@ class Ping
     end
   end
 
-
-  def up_close_mode
-    @paddle_1 = Paddle.new(400, 300, 20, 100, "wasd")
-    @paddle_2 = Paddle.new(950, 300, 20, 100, "arrows")
-  end
-
-  def big_ball_mode
-    state.game_modes[:big_ball] = true
+  def mega_ball_mode
+    state.game_modes[:mega_ball] = true
     next_small_ball = @balls.find { |ball| ball.w != 100}
     if next_small_ball
       next_small_ball.w = 100
@@ -134,11 +151,12 @@ class Ping
         ball.w = 10
         ball.h = 10
       end
-      state.game_modes[:big_ball] = false
+      state.game_modes[:mega_ball] = false
     end
   end
 
   def collide_walls
+
     @balls.each do |ball|
       if ball.y >= (720 - ball.h) || ball.y <= 0
         ball.dy *= -1
@@ -147,8 +165,8 @@ class Ping
 
     # goal collision
     if ball.x >= 1280 || ball.x <= 0
-        outputs.sounds << "sounds/score2.wav"
-
+      collide_sound = "sounds/score2.wav"
+      # standard goal
         if !state.game_modes[:bouncy_walls]
           if ball.x >= 1280
             @player_1_score += 1
@@ -159,18 +177,22 @@ class Ping
           state.game_modes[:serve] = true unless @balls.count > 1
         else
           # owngoal mode
-          # deathball mode
           if ball.x >= 1280
             @player_2_score += 1
           else
             @player_1_score += 1
-            # unless coop 
+            if state.game_modes[:"co-op"]
+              @player_2_score -= 3
+              collide_sound = "sounds/hit.wav"
+            end
           end
 
           ball.dx *= -1
           ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 35)
-
         end
+
+        outputs.sounds << collide_sound
+
       end
     end
   end
