@@ -1,6 +1,5 @@
 
 Standard pong:
-    ☐ inputs
 
     ☐ Game states
         ☐ pre-launch
@@ -9,17 +8,8 @@ Standard pong:
         ☐ win condition
     ☐ physics
         ☐ paddle collision
-            ☐ Move ball to edge of paddle?
-
-
-    ☐ fix static at end of score sound
-    ☐ fix inside-paddle bug
-    ☐ fix speed through paddle bug.
-        ✔ make a rect between ball and next dx @done(21-10-22 16:40)
-        ✔ if intersects, collide and reposition at near side of paddle. @done(21-10-22 16:40)
-        ☐ 
-
-        ☐
+            ☐  reposition at near side of paddle on collision
+        ☐ fix inside-paddle bug
 
 ☐ decide how to grant/revoke/change modes
     ☐ powerups that you get?
@@ -53,6 +43,9 @@ chaos ideas:
 
     ☐ p1 can speed up ball? p2 can slow down ball? Both pressed = normal speed
 
+    ☐ Coop mode
+        - two players, one side is score, one lose
+
 Architecture:
     ☐ look up if ruby args are passed by ref or value
     ☐ Figure out values for window heights. 720 y limit seems slightly offscreen for paddles. 710? A: The issue is paddle was += 10 pixels, so could overshoot to 730.
@@ -64,6 +57,10 @@ Architecture:
 
     ☐ check samples/04_physics_and_collisions/05_box_collision_2/
 Archive:
+  ✔ fix static at end of score sound @done(21-10-23 19:08) @project(Standard pong)
+  ✔ fix speed through paddle bug. @done(21-10-23 19:09) @project(Standard pong)
+  ✔ make a rect between ball and next dx @done(21-10-22 16:40) @project(Standard pong)
+  ✔ if intersects, collide and... @done(21-10-22 16:40) @project(Standard pong)
   ✔ paddles @done(21-10-08 09:51) @project(Standard pong)
   ✔ ball @done(21-10-08 09:52) @project(Standard pong)
   ✔ paddle 2 @done(21-10-22 14:33) @project(Standard pong)

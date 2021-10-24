@@ -22,23 +22,28 @@ class Ping
   def setup
     # @paddle_1 = Paddle.new(50, 50, 20, 100)
     # @paddle_2 = Paddle.new(1200, 50, 20, 100)
-    @paddle_1 = Paddle.new(100, 50, 20, 100, "wasd")
-    @paddle_2 = Paddle.new(1150, 50, 20, 100, "arrows")
+    @paddle_1 = Paddle.new(100, 300, 20, 100, "wasd")
+    @paddle_2 = Paddle.new(1150, 300, 20, 100, "arrows")
     @player_1_score = 0
     @player_2_score = 0
     @ball = Ball.new(640, 360, 10, 10)
 
-    @bouncy_walls = true
     # modes
     # owngoal: bouncy walls and own-goal
+    #
     # tag: bouncy walls, one paddle, scoring on paddle/ball collision
 
   end
 
   def defaults
-    $gtk.args.state.game_mode = "play"
-    $gtk.args.state.game_paused ||= "false"
-    # $gtk.args.state.blinky_ball ||= false
+    state.game_modes ||= { blinky_ball: false,
+      paused: false,
+      bigball: false,
+      bouncy_walls: false,
+    }
+
+
+
   end
 
   def tick
@@ -46,7 +51,7 @@ class Ping
     input
     outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1]
     outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
-    outputs.labels  << [640, 700, "Velocities", 5, 1]
+    # outputs.labels  << [640, 600, "#{state.game_modes}", 2, 1]
     outputs.labels  << [640, 150, "x: #{@ball.x}   dx: #{@ball.dx}", 5, 1]
     outputs.labels  << [640, 100, "y: #{@ball.y}   dy: #{@ball.dy}", 5, 1]
 
@@ -88,40 +93,51 @@ class Ping
     end
 
     if inputs.keyboard.key_down.p || inputs.keyboard.key_down.q
-      if $gtk.args.state.game_paused == "paused"
-        gtk.args.state.game_paused = "play"
-      else
-        gtk.args.state.game_paused = "paused"
-      end
-      puts "Pause!"
-      puts "Pauseval: #{$gtk.args.state.game_paused}"
+      state.game_modes[:paused] = !state.game_modes[:paused]
     end
 
     if inputs.keyboard.key_down.b
-      $gtk.args.state.blinky_ball = true
+      state.game_modes[:blinky_ball] = !state.game_modes[:blinky_ball]
     end
 
+    if inputs.keyboard.key_down.n
+      big_ball_mode
+    end
+
+    if inputs.keyboard.key_down.o
+      state.game_modes[:bouncy_walls] = !state.game_modes[:bouncy_walls]
+    end
+
+
   end
+
+
 
 
   def up_close_mode
-    @paddle_1 = Paddle.new(400, 50, 20, 100, "wasd")
-    @paddle_2 = Paddle.new(950, 50, 20, 100, "arrows")
+    @paddle_1 = Paddle.new(400, 300, 20, 100, "wasd")
+    @paddle_2 = Paddle.new(950, 300, 20, 100, "arrows")
+  end
+
+  def big_ball_mode
+    @ball.w = 100
+    @ball.h = 100
   end
 
   def collide_walls
-    if @ball.y >= 720 || @ball.y <= 0
+    if @ball.y >= (720 - @ball.h) || @ball.y <= 0
       @ball.dy *= -1
       outputs.sounds << "sounds/wall_hit.wav"
       puts 'bonk'
     end
 
-    # goal collision
-    if @ball.x >= 1280 || @ball.x <= 0
+   # goal collision
+   if @ball.x >= 1280 || @ball.x <= 0
 
+    puts state.game_modes
       outputs.sounds << "sounds/score2.wav"
 
-      if !@bouncy_walls
+      if !state.game_modes[:bouncy_walls]
         if @ball.x >= 1280
           @player_1_score += 1
         else
