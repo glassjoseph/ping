@@ -63,6 +63,6 @@ class Paddle
 
   def tick(args)
     update(args)
-    args.outputs.solids << rect
+    args.outputs.solids << [@x, @y, @w, @h]
   end
 end

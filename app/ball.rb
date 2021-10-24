@@ -9,7 +9,7 @@ class Ball
 
     BASE_SPEED = 5
 
-    # @dx = (rand(50) + 30).randomize(:sign) #deatball
+    # @dx = (rand(50) + 30).randomize(:sign) #deathball
     @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
     @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
   end
