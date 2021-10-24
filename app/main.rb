@@ -18,6 +18,12 @@ class Ping
     @player_1_score = 0
     @player_2_score = 0
     @balls = [Ball.new(640, 360, 10, 10)]
+    state.game_modes = { serve: true,
+      blinky_ball: false,
+      paused: false,
+      bigball: false,
+      bouncy_walls: false,
+    }
   end
 
   def defaults
@@ -90,6 +96,7 @@ class Ping
 
     if inputs.keyboard.key_down.n
       @balls.push(Ball.new(640, 360, 10, 10))
+      state.game_modes[:multi_ball] = true
     end
 
     if inputs.keyboard.key_down.o
