@@ -2,14 +2,18 @@
 Standard pong:
 
     ☐ Game states
-        ☐ pre-launch
-        ☐ in-game
-        ☐ pause
+        ☐ Start menu
+            ☐ list of modes
+                ☐ find button
+                ☐ add buttons for each
+                ☐ add start
+
+        ☐ Serve
         ☐ win condition
     ☐ physics
-        ☐ paddle collision
-            ☐  reposition at near side of paddle on collision
+    ☐ paddle collision
         ☐ fix inside-paddle bug
+            ☐  reposition ball to near side of paddle on collision
 
 ☐ decide how to grant/revoke/change modes
     ☐ powerups that you get?
@@ -23,7 +27,6 @@ chaos ideas:
         ?? p1 and p2 can control, but can't move their paddles while controlling? Or there's a time delay. Or a button to "freeze" the cheater if you notice.
         ?? 'Use the Force'  - p1 and p2 can *both* control the ball with same inputs as their paddles?
     ☐ Super-fast up/down velocity mode
-    ☐ left-right movement mode
     ☐ switch sides mode
     ☐ reversed movements mode up/down,  left/right   up/right down/left
     ☐ deathball - ball speeds up, bounces on all walls, point awarded to whoever doesn't get hit first
@@ -57,6 +60,9 @@ Architecture:
 
     ☐ check samples/04_physics_and_collisions/05_box_collision_2/
 Archive:
+  ✔ left-right movement mode @done(21-10-23 21:19) @project(chaos ideas)
+  ✔ in-game @done(21-10-23 20:39) @project(Standard pong)
+  ✔ pause @done(21-10-23 20:39) @project(Standard pong)
   ✔ fix static at end of score sound @done(21-10-23 19:08) @project(Standard pong)
   ✔ fix speed through paddle bug. @done(21-10-23 19:09) @project(Standard pong)
   ✔ make a rect between ball and next dx @done(21-10-22 16:40) @project(Standard pong)

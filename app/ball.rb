@@ -1,7 +1,7 @@
 class Ball
   attr_accessor :x, :y, :w, :h, :dx, :dy
 
-  def initialize(x=640, y=360, w=100, h=100)
+  def initialize(x=640, y=360, w=10, h=10)
     @x = x
     @y = y
     @w = w
@@ -12,8 +12,6 @@ class Ball
     # @dx = (rand(50) + 30).randomize(:sign) #deatball
     @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
     @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
-    # @dy = 0
-
   end
 
   def reset
@@ -38,16 +36,13 @@ class Ball
     end
   end
 
-
   def tick(args)
-    update unless args.state.game_modes[:paused]
+    update unless args.state.game_modes[:serve] || args.state.game_modes[:paused]
 
     if args.state.game_modes[:blinky_ball]
       return if (args.state.tick_count % 100 < 20)
     end
 
     (args.outputs.solids << [@x, @y, @w, @h])
-    # puts "X: #{x}, Y: #{y}"
   end
-
 end
