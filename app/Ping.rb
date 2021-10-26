@@ -164,11 +164,11 @@ class Ping
       end
 
     # goal collision
-    if ball.x >= 1280 || ball.x <= 0
+    if ball.x >= (1280 - ball.w) || ball.x <= 0
       collide_sound = "sounds/score2.wav"
       # standard goal
         if !state.game_modes[:bouncy_walls]
-          if ball.x >= 1280
+          if ball.x >= (1280 - ball.w)
             @player_1_score += 1
           else
             @player_2_score += 1
@@ -177,7 +177,7 @@ class Ping
           state.game_modes[:serve] = true unless @balls.count > 1
         else
           # owngoal mode
-          if ball.x >= 1280
+          if ball.x >= (1280 - ball.w)
             @player_2_score += 1
           else
             @player_1_score += 1
