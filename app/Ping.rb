@@ -130,7 +130,8 @@ class Ping
 
     # TODO: improve game_modes so it's not recalculated every tick.
     mode_label_y = 700
-    state.game_modes.select {|k, v| v}.keys.each {|mode_name|
+    # Find different way to access game_modes
+    args.state.game_modes.as_hash.select {|k, v| v}.keys.each {|mode_name|
       outputs.labels  << [640, mode_label_y, mode_name, 2, 1]
       mode_label_y -= 30
     }
