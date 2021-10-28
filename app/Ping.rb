@@ -6,13 +6,13 @@ class Ping
   end
 
   def setup
-    @paddle_1 = Paddle.new(100, 300, 20, 100, "wasd")
-    @paddle_2 = Paddle.new(1150, 300, 20, 100, "arrows")
-    @player_1_score = 0
-    @player_2_score = 0
+    @paddle_1 ||= Paddle.new(100, 300, 20, 100, "wasd")
+    @paddle_2 ||= Paddle.new(1150, 300, 20, 100, "arrows")
+    @player_1_score ||= 0
+    @player_2_score ||= 0
 
-    @balls = [Ball.new(640, 360, 10, 10)]
-    $gtk.args.state.game_modes = { serve: true,
+    @balls ||= [Ball.new(640, 360, 10, 10)]
+    $gtk.args.state.game_modes ||= { serve: true,
       paused: false,
       mega_ball: false,
       blinky_ball: false,
@@ -27,6 +27,7 @@ class Ping
   def tick
     input
     labels
+    highlight_goals
 
     @paddle_1.tick(args)
     @paddle_2.tick(args)
@@ -46,7 +47,7 @@ class Ping
     @balls.each do |ball|
       if @paddle_1.rect.intersect_rect?(ball.collision_rect) || @paddle_2.rect.intersect_rect?(ball.collision_rect)
         args.outputs.sounds << "sounds/paddle_hit.wav"
-        ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 50 )
+        ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 30 )
         ball.dx *= -1
       end
     end
@@ -140,6 +141,19 @@ class Ping
     end
   end
 
+  def highlight_goals
+    if state.game_modes[:"co-op"]
+      outputs.solids << [0, 0, 10, 720, 255, 0, 0, 200]
+      outputs.solids << [1270, 0, 10, 720, 0, 28, 255, 99, 200]
+    elsif state.game_modes[:bouncy_walls]
+      outputs.solids << [0, 0, 10, 720, 0, 255, 255, 200]
+      outputs.solids << [1270, 0, 10, 720, 28, 255, 99, 200]
+    else
+      outputs.solids << [1270, 0, 10, 720, 0, 255, 255, 200]
+      outputs.solids << [0, 0, 10, 720, 28, 255, 99, 200]
+    end
+  end
+
   def mega_ball_mode
     state.game_modes[:mega_ball] = true
     next_small_ball = @balls.find { |ball| ball.w != 100}
@@ -182,13 +196,13 @@ class Ping
           else
             @player_1_score += 1
             if state.game_modes[:"co-op"]
-              @player_2_score -= 3
+              @player_2_score -= 2
               collide_sound = "sounds/hit.wav"
             end
           end
 
           ball.dx *= -1
-          ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 35)
+          ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 30)
         end
 
         outputs.sounds << collide_sound
@@ -196,5 +210,4 @@ class Ping
       end
     end
   end
-
 end

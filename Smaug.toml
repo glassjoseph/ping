@@ -4,7 +4,7 @@ name = "ping"
 # The game's title. This will show up in the tile bar of your executable.
 title = "Ping"
 version = "0.1.0"
-authors = ["Joseph Glass <https://github.com/glassjoseph/ping>"]
+authors = ["Joseph Glass https://github.com/glassjoseph"]
 icon = "metadata/icon.png"
 compile_ruby = false
 
