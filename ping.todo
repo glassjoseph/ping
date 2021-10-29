@@ -10,10 +10,10 @@ Standard pong:
 
         ☐ Serve
         ☐ win condition
-    ☐ physics
-    ☐ paddle collision
-        ☐ fix inside-paddle bug
-            ☐  reposition ball to near side of paddle on collision
+    ✔ physics @done(21-10-29 19:51)
+    ✔ paddle collision @done(21-10-29 19:51)
+        ✔ fix inside-paddle bug @done(21-10-29 19:51)
+            ✔  reposition ball to near side of paddle on collision @done(21-10-29 19:51)
 
 ☐ decide how to grant/revoke/change modes
     ☐ powerups that you get?
@@ -32,7 +32,6 @@ chaos ideas:
     ☐ deathball - ball speeds up, bounces on all walls, point awarded to whoever doesn't get hit first
     ☐ slippy ice mode - long slow speedup, slowdow
     ☐ Reversed paddles/sides - you control your opponent's side, but your "paddle" is a small negative space in a wall.
-    ☐ Paddleboard mode - your goal is your side's wall. You get points for each bounce against it. Try to trap ball between yourself and the wall.
     ☐ bigball - large ball. knockback. 'dazed/stunned' effect?
 
     ☐ fastball
@@ -60,6 +59,7 @@ Architecture:
 
     ☐ check samples/04_physics_and_collisions/05_box_collision_2/
 Archive:
+  ✔ Paddleboard mode - your goal is your side's wall. You get points for each bounce against it. Try to trap ball between yourself and the wall. @done(21-10-29 10:47) @project(chaos ideas)
   ✔ left-right movement mode @done(21-10-23 21:19) @project(chaos ideas)
   ✔ in-game @done(21-10-23 20:39) @project(Standard pong)
   ✔ pause @done(21-10-23 20:39) @project(Standard pong)

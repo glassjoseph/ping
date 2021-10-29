@@ -28,7 +28,7 @@ class Ball
 
   def collision_rect
     # expand collision rect ahead to detect next frame
-    if @dx > 0
+    if @dx.positive?
       [@x, @y, @w + @dx, @h]
     else
       # shift ball collision detection to left
@@ -45,4 +45,5 @@ class Ball
 
     (args.outputs.solids << [@x, @y, @w, @h])
   end
+
 end

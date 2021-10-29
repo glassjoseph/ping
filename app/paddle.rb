@@ -9,8 +9,6 @@ class Paddle
     @control_scheme = control_scheme
   end
 
-
-
   def update(args)
     if @control_scheme == "arrows"
       if args.inputs.keyboard.key_held.up

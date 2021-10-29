@@ -12,6 +12,7 @@ class Ping
     @player_2_score ||= 0
 
     @balls ||= [Ball.new(640, 360, 10, 10)]
+    @paddles ||= [@paddle_1, @paddle_2]
     $gtk.args.state.game_modes ||= { serve: true,
       paused: false,
       mega_ball: false,
@@ -45,10 +46,20 @@ class Ping
 
   def calc_collision(args)
     @balls.each do |ball|
-      if @paddle_1.rect.intersect_rect?(ball.collision_rect) || @paddle_2.rect.intersect_rect?(ball.collision_rect)
-        args.outputs.sounds << "sounds/paddle_hit.wav"
-        ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 30 )
-        ball.dx *= -1
+      @paddles.each do |paddle|
+        if paddle.rect.intersect_rect?(ball.collision_rect)
+          # reposition ball to near side of paddle on collision
+          ball_offset = 10.greater(ball.w/2) # ball_width for small, ball midpoint for megaballs
+          if (ball.x + ball.w) <= (paddle.x + ball_offset)
+            ball.x = paddle.x - ball.w - 10
+          else
+            ball.x = paddle.x + paddle.w + 10
+          end
+
+          args.outputs.sounds << "sounds/paddle_hit.wav"
+          ball.dx +=  (ball.dx.pos? ? 1 : -1) unless (ball.dx.abs() > 30 )
+          ball.dx *= -1
+        end
       end
     end
 
