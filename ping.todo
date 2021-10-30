@@ -8,7 +8,7 @@ Standard pong:
                 ☐ add buttons for each
                 ☐ add start
 
-        ☐ Serve
+        ✔ Serve @done(21-10-29 22:01)
         ☐ win condition
     ✔ physics @done(21-10-29 19:51)
     ✔ paddle collision @done(21-10-29 19:51)

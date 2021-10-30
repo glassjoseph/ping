@@ -105,7 +105,7 @@ class Ping
     end
 
     if inputs.keyboard.key_down.b || inputs.keyboard.key_down.four
-      state.game_modes[:bouncy_walls] = !state.game_modes[:bouncy_walls]
+      state.game_modes[:bouncy_walls] = !state.game_modes[:bouncy_walls] unless state.game_modes[:"co-op"]
     end
 
     if inputs.keyboard.key_down.f || inputs.keyboard.key_down.five
@@ -151,6 +151,7 @@ class Ping
     if state.game_modes[:debug]
       outputs.labels  << [640, 150, "x: #{@balls[0].x}   dx: #{@balls[0].dx}", 5, 1]
       outputs.labels  << [640, 100, "y: #{@balls[0].y}   dy: #{@balls[0].dy}", 5, 1]
+      outputs.labels << [10, 710, "framerate: #{args.gtk.current_framerate.round}"]
     end
   end
 
