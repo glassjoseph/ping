@@ -1,12 +1,13 @@
 class Paddle
-  attr_accessor :x, :y, :w, :h, :control_scheme
+  attr_accessor :x, :y, :w, :h, :control_scheme, :color
 
-  def initialize(x, y, w=10, h=100, control_scheme)
+  def initialize(x, y, w=10, h=100, control_scheme, color)
     @x = x
     @y = y
     @w = w
     @h = h
     @control_scheme = control_scheme
+    @color = color
   end
 
   def update(args)
@@ -64,6 +65,7 @@ class Paddle
 
   def tick(args)
     update(args)
-    args.outputs.solids << [@x, @y, @w, @h]
+    args.outputs.solids << [@x, @y, @w, @h, @color]
+    args.outputs.solids << [@x, @y + 8, @w, @h - 16]
   end
 end

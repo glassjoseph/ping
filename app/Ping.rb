@@ -6,13 +6,16 @@ class Ping
   end
 
   def setup
-    @paddle_1 ||= Paddle.new(100, 300, 20, 100, "wasd")
-    @paddle_2 ||= Paddle.new(1150, 300, 20, 100, "arrows")
+    green = [10, 187, 10]
+    blue = [0, 118, 189, 200]
+
+    @paddle_1 ||= Paddle.new(100, 300, 20, 100, "wasd", blue)
+    @paddle_2 ||= Paddle.new(1150, 300, 20, 100, "arrows", green)
+    @paddles ||= [@paddle_1, @paddle_2]
     @player_1_score ||= 0
     @player_2_score ||= 0
 
     @balls ||= [Ball.new(640, 360, 10, 10)]
-    @paddles ||= [@paddle_1, @paddle_2]
     $gtk.args.state.game_modes ||= { serve: true,
       paused: false,
       mega_ball: false,
@@ -138,11 +141,9 @@ class Ping
     outputs.labels  << [100, 700, "Score: #{@player_1_score}", 5, 1] unless state.game_modes[:"co-op"]
     outputs.labels  << [1150, 700, "Score: #{@player_2_score}", 5, 1]
 
-
     # TODO: improve game_modes so it's not recalculated every tick.
     mode_label_y = 700
-    # Find different way to access game_modes
-    args.state.game_modes.as_hash.select {|k, v| v}.keys.each {|mode_name|
+    state.game_modes.as_hash.select {|k, v| v}.keys.each {|mode_name|
       outputs.labels  << [640, mode_label_y, mode_name, 2, 1]
       mode_label_y -= 30
     }
@@ -154,15 +155,19 @@ class Ping
   end
 
   def highlight_goals
+    green = [27, 225, 27]
+    green = [10, 187, 10]
+    blue = [0, 118, 189, 200]
     if state.game_modes[:"co-op"]
       outputs.solids << [0, 0, 10, 720, 255, 0, 0, 200]
       outputs.solids << [1270, 0, 10, 720, 0, 28, 255, 99, 200]
     elsif state.game_modes[:bouncy_walls]
-      outputs.solids << [0, 0, 10, 720, 0, 255, 255, 200]
-      outputs.solids << [1270, 0, 10, 720, 28, 255, 99, 200]
+      outputs.solids << [1270, 0, 10, 720, green]
+      outputs.solids << [0, 0, 10, 720, blue]
+
     else
-      outputs.solids << [1270, 0, 10, 720, 0, 255, 255, 200]
-      outputs.solids << [0, 0, 10, 720, 28, 255, 99, 200]
+      outputs.solids << [1270, 0, 10, 720, blue]
+      outputs.solids << [0, 0, 10, 720, green]
     end
   end
 
@@ -182,7 +187,6 @@ class Ping
   end
 
   def collide_walls
-
     @balls.each do |ball|
       if ball.y >= (720 - ball.h) || ball.y <= 0
         ball.dy *= -1
@@ -218,8 +222,8 @@ class Ping
         end
 
         outputs.sounds << collide_sound
-
       end
     end
   end
+
 end
