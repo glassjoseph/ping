@@ -1,11 +1,12 @@
 class Ball
-  attr_accessor :x, :y, :w, :h, :dx, :dy
+  attr_accessor :x, :y, :w, :h, :dx, :dy, :score_count
 
   def initialize(x=640, y=360, w=10, h=10)
     @x = x
     @y = y
     @w = w
     @h = h
+    @score_count = score_count
 
     BASE_SPEED = 5
 
@@ -19,6 +20,7 @@ class Ball
     @y = 360
     @dx = (rand(BASE_SPEED) + 4).randomize(:sign)
     @dy = (rand(BASE_SPEED) + 4).randomize(:sign)
+    @score_count = 0
   end
 
   def update

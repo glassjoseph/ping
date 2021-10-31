@@ -1,5 +1,6 @@
 class Ping
   attr_gtk
+  attr_accessor :balls, :paddle_1, :paddle_2
 
   def initialize
     setup
@@ -70,7 +71,7 @@ class Ping
   end
 
   def input
-    if state.game_modes[:serve] == true & inputs.keyboard.space
+    if state.game_modes[:serve] == true && inputs.keyboard.space
       state.game_modes[:serve] = false
     end
 
@@ -194,10 +195,17 @@ class Ping
         outputs.sounds << "sounds/wall_hit.wav"
       end
 
-    # goal collision
-    if ball.x >= (1280 - ball.w) || ball.x <= 0
-      collide_sound = "sounds/score2.wav"
-      # standard goal
+      # goal collision
+      if ball.x >= (1280 - ball.w) || ball.x <= 0
+        collide_sound = "sounds/score2.wav"
+        ball.score_count += 1
+        if ball.score_count > 30 && !state.game_modes[:paused]
+          collide_sound = "sounds/ball_splat.wav"
+          ball.reset
+          state.game_modes[:serve] = true unless @balls.count > 1
+        end
+
+        # standard goal
         if !state.game_modes[:bouncy_walls]
           if ball.x >= (1280 - ball.w)
             @player_1_score += 1
